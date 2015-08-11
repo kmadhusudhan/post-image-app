@@ -1,0 +1,18 @@
+<h1>Listing images</h1>
+
+<% @ideas.in_groups_of(3) do |group| %>
+  <div class="row">
+    <% group.compact.each do |idea| %>
+      <div class="col-md-4">
+        <%= image_tag idea.picture_url, width: '100%' if idea.picture.present?%>
+        <h2><%= link_to "Add Comment Here", idea,:class=>"btn btn-link" %></h2>
+        <b>Comments:</b><br/>
+        <%for comment in idea.comments%>
+         User :<%=comment.user_name%><br/>
+               <%=comment.body%><br/>
+         <%end%>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+<ul class="pagination"><%= will_paginate @ideas %></ul>
